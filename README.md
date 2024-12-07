@@ -7,12 +7,61 @@ Hi im drbloop and im a medium level programmer for roblox LUAU you can explore m
 ## Releases
 
 ### [FireAllClientWithException](https://create.roblox.com/store/asset/93621962059280/Fire-all-clients-expect?assetType=Model&externalSource=www)
+
+## **Source:**
+
+```lua
+--!strict
+--!native
+--!optimize 2
+local self = {}
+@native function self.FireAllClientsExpect(Remote: RemoteEvent, Expect: Player, ...)
+    if not Remote or not Expect then
+        return
+    end
+    local args = {...}
+    for _, client in game:GetService("Players"):GetPlayers() do
+        if client ~= Expect or client ~= Expect.Name then
+            Remote:FireClient(client, unpack(args))
+        end
+    end
+end
+return self
+```
+
 **Description:**  
 A simple, easy-to-use module designed for RemoteEvents, allowing you to fire all clients except one specific player.
 
 ---
 
 ### [CreateAudio](https://create.roblox.com/store/asset/82748303737235/CreateAudio?assetType=Model&externalSource=www)
+
+## **Source:**
+
+```lua
+--!nonstrict
+--!native
+local self = {}
+local MuteWarn = false
+@native function self.new(Name: string, ID: number, Volume: number?, Parent: any?)
+    warn(ID)
+    if not ID then
+        error("[GAME/DATA/CREATESOUND] Sound Creation Failed! SoundID is Missing or Nil!")
+    end;
+    if not Parent and MuteWarn == false then
+        warn("[GAME/DATA/CREATESOUND] Parent is missing or nil, Sound parent will fall back to sound service, to mute this go into the module and change MuteWarn to True")
+    end;
+    assert(type(ID) == "number", "[GAME/DATA/CREATESOUND] Sound Creation Failed! SoundID is not a number!")
+    assert(type(Volume) == "number", "[GAME/DATA/CREATESOUND] Sound Creation Failed! SoundID is not a number!")
+    local NewSFX = Instance.new("Sound", Parent or game:GetService("SoundService"))
+    NewSFX.SoundId = "rbxassetid://"..ID
+    NewSFX.Volume = Volume or 1
+    NewSFX.Name = Name or "Sound"
+    return NewSFX
+end;
+return self
+```
+
 **Description:**  
 A very simple Module designed to simplify robox development for audio creation
 
