@@ -1,4 +1,4 @@
-# Wlecome
+# Welcome
 
 Hi im drbloop and im a medium level programmer for roblox LUAU you can explore my projects here
 
