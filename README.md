@@ -58,8 +58,10 @@ do
     if not Parent and MuteWarn == false then
         warn("[GAME/DATA/CREATESOUND] Parent is missing or nil, Sound parent will fall back to sound service, to mute this go into the module and change MuteWarn to True")
     end;
-end;
 
+    assert(type(ID) == "number", "[GAME/DATA/CREATESOUND] Sound Creation Failed! SoundID is not a number!")
+    assert(type(Volume) == "number", "[GAME/DATA/CREATESOUND] Sound Creation Failed! SoundID is not a number!")
+end
 
     local NewSFX = Instance.new("Sound", Parent or game:GetService("SoundService"))
     NewSFX.SoundId = "rbxassetid://"..ID
