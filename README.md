@@ -14,18 +14,21 @@ Hi im drbloop and im a medium level programmer for roblox LUAU you can explore m
 --!strict
 --!native
 --!optimize 2
+
 local self = {}
+local Players = game:GetService("Players")
+
 @native function self.FireAllClientsExpect(Remote: RemoteEvent, Expect: Player, ...)
     if not Remote or not Expect then
         return
     end
-    local args = {...}
-    for _, client in game:GetService("Players"):GetPlayers() do
-        if client ~= Expect or client ~= Expect.Name then
-            Remote:FireClient(client, unpack(args))
+    for _, player: Player in Players:GetPlayers() do
+        if player ~= Expect then
+            Remote:FireClient(player, unpack(...))
         end
     end
 end
+
 return self
 ```
 
